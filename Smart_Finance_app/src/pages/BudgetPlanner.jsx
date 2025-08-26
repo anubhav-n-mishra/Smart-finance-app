@@ -11,7 +11,7 @@ import {
 } from 'react-icons/fa';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import api from '../services/api';
-import { formatCurrency, formatIndianCurrency } from '../utils/currency';
+import { formatCurrency } from '../utils/currency';
 
 const BudgetPlanner = () => {
   const [budgets, setBudgets] = useState([]);
@@ -305,7 +305,7 @@ const BudgetPlanner = () => {
                       </p>
                       <div className="flex justify-between items-center">
                         <span className="text-sm font-medium">
-                          {formatIndianCurrency(budget.totalSpent)} / {formatIndianCurrency(budget.totalBudget)}
+                          {formatCurrency(budget.totalSpent)} / {formatCurrency(budget.totalBudget)}
                         </span>
                         <span className={`text-sm font-bold ${getUsageColor(budget.usagePercentage)}`}>
                           {budget.usagePercentage.toFixed(1)}%
@@ -349,19 +349,19 @@ const BudgetPlanner = () => {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                       <div className="text-center">
                         <p className="text-2xl font-bold text-blue-600">
-                          {formatIndianCurrency(budgetAnalytics.budget.totalBudget)}
+                          {formatCurrency(budgetAnalytics.budget.totalBudget)}
                         </p>
                         <p className="text-sm text-gray-600">Total Budget</p>
                       </div>
                       <div className="text-center">
                         <p className="text-2xl font-bold text-green-600">
-                          {formatIndianCurrency(budgetAnalytics.budget.totalSpent)}
+                          {formatCurrency(budgetAnalytics.budget.totalSpent)}
                         </p>
                         <p className="text-sm text-gray-600">Total Spent</p>
                       </div>
                       <div className="text-center">
                         <p className="text-2xl font-bold text-orange-600">
-                          {formatIndianCurrency(budgetAnalytics.budget.remainingBudget)}
+                          {formatCurrency(budgetAnalytics.budget.remainingBudget)}
                         </p>
                         <p className="text-sm text-gray-600">Remaining</p>
                       </div>
@@ -388,19 +388,19 @@ const BudgetPlanner = () => {
                         <div>
                           <p className="text-sm text-gray-600">Daily Rate</p>
                           <p className="font-semibold">
-                            {formatIndianCurrency(budgetAnalytics.healthMetrics.dailySpendingRate)}
+                            {formatCurrency(budgetAnalytics.healthMetrics.dailySpendingRate)}
                           </p>
                         </div>
                         <div>
                           <p className="text-sm text-gray-600">Projected Total</p>
                           <p className={`font-semibold ${budgetAnalytics.healthMetrics.isOnTrack ? 'text-green-600' : 'text-red-600'}`}>
-                            {formatIndianCurrency(budgetAnalytics.healthMetrics.projectedSpending)}
+                            {formatCurrency(budgetAnalytics.healthMetrics.projectedSpending)}
                           </p>
                         </div>
                         <div>
                           <p className="text-sm text-gray-600">Recommended Daily</p>
                           <p className="font-semibold text-blue-600">
-                            {formatIndianCurrency(budgetAnalytics.healthMetrics.recommendedDailySpending)}
+                            {formatCurrency(budgetAnalytics.healthMetrics.recommendedDailySpending)}
                           </p>
                         </div>
                         <div>
@@ -435,7 +435,7 @@ const BudgetPlanner = () => {
                                 <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
                               ))}
                             </Pie>
-                            <Tooltip formatter={(value) => formatIndianCurrency(value)} />
+                            <Tooltip formatter={(value) => formatCurrency(value)} />
                           </PieChart>
                         </ResponsiveContainer>
                       </div>
@@ -482,7 +482,7 @@ const BudgetPlanner = () => {
                           <CartesianGrid strokeDasharray="3 3" />
                           <XAxis dataKey="_id" />
                           <YAxis tickFormatter={(value) => `₹${value}`} />
-                          <Tooltip formatter={(value) => [formatIndianCurrency(value), 'Amount']} />
+                          <Tooltip formatter={(value) => [formatCurrency(value), 'Amount']} />
                           <Bar dataKey="dailyTotal" fill="#3B82F6" />
                         </BarChart>
                       </ResponsiveContainer>

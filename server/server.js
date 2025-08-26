@@ -25,13 +25,45 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Database connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/smart-finance', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log('✅ MongoDB Connected'))
-.catch((err) => console.error('❌ MongoDB connection error:', err));
+// Database connection with fallback
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/smart-finance', {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
+      maxPoolSize: 10,
+    });
+    console.log('✅ MongoDB Connected successfully');
+  } catch (err) {
+    console.error('❌ MongoDB connection error:', err.message);
+    console.log('🔄 Server will continue running without database connection');
+    console.log('💡 Please check your MongoDB Atlas IP whitelist and internet connection');
+  }
+};
+
+// Connect to database
+connectDB();
+
+// Handle MongoDB connection events
+mongoose.connection.on('disconnected', () => {
+  console.log('⚠️  MongoDB disconnected');
+});
+
+mongoose.connection.on('reconnected', () => {
+  console.log('🔄 MongoDB reconnected');
+});
+
+// Graceful error handling for uncaught exceptions
+process.on('unhandledRejection', (err, promise) => {
+  console.log('❌ Unhandled Promise Rejection:', err.message);
+  // Don't exit the process, just log the error
+});
+
+process.on('uncaughtException', (err) => {
+  console.log('❌ Uncaught Exception:', err.message);
+  // Don't exit the process, just log the error
+});
 
 // Routes
 app.use('/api/auth', authRoutes);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaPlus, FaBullseye, FaClock, FaArrowUp, FaEdit, FaTrash, FaRupeeSign } from 'react-icons/fa';
 import api from '../services/api';
-import { formatCurrency, formatIndianCurrency } from '../utils/currency';
+import { formatCurrency } from '../utils/currency';
 
 const SavingsGoals = () => {
   const [goals, setGoals] = useState([]);
@@ -228,7 +228,7 @@ const SavingsGoals = () => {
                 <div>
                   <p className="text-sm font-medium text-gray-600">Target Amount</p>
                   <p className="text-2xl font-bold text-indigo-600">
-                    {formatIndianCurrency(stats.totalTargetAmount)}
+                    {formatCurrency(stats.totalTargetAmount)}
                   </p>
                 </div>
                 <FaRupeeSign className="text-3xl text-indigo-600" />
@@ -239,7 +239,7 @@ const SavingsGoals = () => {
                 <div>
                   <p className="text-sm font-medium text-gray-600">Saved So Far</p>
                   <p className="text-2xl font-bold text-purple-600">
-                    {formatIndianCurrency(stats.totalCurrentAmount)}
+                    {formatCurrency(stats.totalCurrentAmount)}
                   </p>
                 </div>
                 <FaClock className="text-3xl text-purple-600" />
@@ -254,7 +254,7 @@ const SavingsGoals = () => {
             <h3 className="text-lg font-semibold text-gray-800 mb-4">Overall Progress</h3>
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-medium text-gray-700">
-                {formatIndianCurrency(stats.totalCurrentAmount)} / {formatIndianCurrency(stats.totalTargetAmount)}
+                {formatCurrency(stats.totalCurrentAmount)} / {formatCurrency(stats.totalTargetAmount)}
               </span>
               <span className="text-sm font-medium text-gray-700">
                 {stats.overallProgress.toFixed(1)}%
@@ -316,19 +316,19 @@ const SavingsGoals = () => {
                     <div className="flex justify-between">
                       <span className="text-sm text-gray-600">Current:</span>
                       <span className="text-sm font-semibold">
-                        {formatIndianCurrency(goal.currentAmount)}
+                        {formatCurrency(goal.currentAmount)}
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm text-gray-600">Target:</span>
                       <span className="text-sm font-semibold">
-                        {formatIndianCurrency(goal.targetAmount)}
+                        {formatCurrency(goal.targetAmount)}
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm text-gray-600">Remaining:</span>
                       <span className="text-sm font-semibold text-orange-600">
-                        {formatIndianCurrency(goal.remainingAmount)}
+                        {formatCurrency(goal.remainingAmount)}
                       </span>
                     </div>
                   </div>
@@ -581,13 +581,13 @@ const SavingsGoals = () => {
                 </h2>
                 <div className="mb-4 p-4 bg-blue-50 rounded-lg">
                   <p className="text-sm text-gray-600">
-                    Current: <span className="font-semibold">{formatIndianCurrency(selectedGoal.currentAmount)}</span>
+                    Current: <span className="font-semibold">{formatCurrency(selectedGoal.currentAmount)}</span>
                   </p>
                   <p className="text-sm text-gray-600">
-                    Target: <span className="font-semibold">{formatIndianCurrency(selectedGoal.targetAmount)}</span>
+                    Target: <span className="font-semibold">{formatCurrency(selectedGoal.targetAmount)}</span>
                   </p>
                   <p className="text-sm text-gray-600">
-                    Remaining: <span className="font-semibold text-orange-600">{formatIndianCurrency(selectedGoal.remainingAmount)}</span>
+                    Remaining: <span className="font-semibold text-orange-600">{formatCurrency(selectedGoal.remainingAmount)}</span>
                   </p>
                 </div>
                 <form onSubmit={handleContribute} className="space-y-4">
