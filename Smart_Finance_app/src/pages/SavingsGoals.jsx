@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaPlus, FaBullseye, FaClock, FaArrowUp, FaEdit, FaTrash, FaRupeeSign } from 'react-icons/fa';
-import { api } from '../services/api';
+import api from '../services/api';
 import { formatCurrency, formatIndianCurrency } from '../utils/currency';
 
 const SavingsGoals = () => {

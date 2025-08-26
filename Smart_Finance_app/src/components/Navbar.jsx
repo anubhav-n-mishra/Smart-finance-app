@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { logout } from '../store/authSlice';
 import NotificationCenter from './NotificationCenter';
-import { api } from '../services/api';
+import api from '../services/api';
 import { 
   FaDollarSign, 
   FaHome, 

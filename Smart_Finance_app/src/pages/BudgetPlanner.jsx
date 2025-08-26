@@ -10,7 +10,7 @@ import {
   FaRupeeSign 
 } from 'react-icons/fa';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { api } from '../services/api';
+import api from '../services/api';
 import { formatCurrency, formatIndianCurrency } from '../utils/currency';
 
 const BudgetPlanner = () => {

@@ -11,7 +11,7 @@ import {
   FaClock,
   FaBellSlash
 } from 'react-icons/fa';
-import { api } from '../services/api';
+import api from '../services/api';
 
 const NotificationCenter = ({ isOpen, onClose }) => {
   const [notifications, setNotifications] = useState([]);
