@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaPlus, FaBullseye, FaClock, FaTrendingUp, FaEdit, FaTrash, FaRupeeSign } from 'react-icons/fa';
+import { FaPlus, FaBullseye, FaClock, FaArrowUp, FaEdit, FaTrash, FaRupeeSign } from 'react-icons/fa';
 import { api } from '../services/api';
 import { formatCurrency, formatIndianCurrency } from '../utils/currency';
 
@@ -220,7 +220,7 @@ const SavingsGoals = () => {
                   <p className="text-sm font-medium text-gray-600">Completed</p>
                   <p className="text-2xl font-bold text-green-600">{stats.completedGoals}</p>
                 </div>
-                <FaTrendingUp className="text-3xl text-green-600" />
+                <FaArrowUp className="text-3xl text-green-600" />
               </div>
             </div>
             <div className="bg-white rounded-lg shadow-md p-6">

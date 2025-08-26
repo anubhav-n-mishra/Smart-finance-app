@@ -4,7 +4,7 @@ import {
   FaCheck, 
   FaTrash, 
   FaExclamationTriangle, 
-  FaTarget, 
+  FaBullseye, 
   FaChartPie, 
   FaCreditCard,
   FaTrophy,

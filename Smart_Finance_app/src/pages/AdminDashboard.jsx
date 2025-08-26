@@ -183,7 +183,7 @@ const AdminDashboard = () => {
             {[
               { id: 'overview', name: 'Overview', icon: FaChartLine },
               { id: 'users', name: 'User Management', icon: FaUsers },
-              { id: 'analytics', name: 'Analytics', icon: FaTrendingUp },
+              { id: 'analytics', name: 'Analytics', icon: FaArrowUp },
               { id: 'system', name: 'System Logs', icon: FaCog }
             ].map((tab) => {
               const Icon = tab.icon;
