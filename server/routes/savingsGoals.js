@@ -1,8 +1,10 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import SavingsGoal from '../models/SavingsGoal.js';
+import User from '../models/User.js';
 import { authenticateToken } from '../middleware/auth.js';
 import { checkSavingsGoalProgress } from '../utils/notifications.js';
+import { sendEmail } from '../services/emailService.js';
 
 const router = express.Router();
 
@@ -148,7 +150,34 @@ router.post('/:id/contribute', authenticateToken, async (req, res) => {
     // Update current amount
     goal.currentAmount += amount;
 
+    // Check if goal is achieved
+    const wasAchieved = goal.currentAmount >= goal.targetAmount && (goal.currentAmount - amount) < goal.targetAmount;
+
     await goal.save();
+
+    // Send achievement email if goal is newly achieved
+    if (wasAchieved) {
+      try {
+        const user = await User.findById(req.user.userId);
+        if (user) {
+          sendEmail(user.email, 'goalAchieved', {
+            name: user.name,
+            goalTitle: goal.title,
+            amount: goal.targetAmount
+          }).then(result => {
+            if (result.success) {
+              console.log(`✅ Goal achievement email sent to ${user.email} for goal: ${goal.title}`);
+            } else {
+              console.log(`⚠️ Failed to send goal achievement email: ${result.message}`);
+            }
+          }).catch(err => {
+            console.log(`❌ Error sending goal achievement email: ${err.message}`);
+          });
+        }
+      } catch (emailError) {
+        console.error('Error sending goal achievement email:', emailError);
+      }
+    }
 
     // Check for notifications (milestones, achievements)
     await checkSavingsGoalProgress(req.user.userId, goalId);

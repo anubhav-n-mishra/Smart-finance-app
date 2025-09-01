@@ -18,6 +18,7 @@ import {
   FaUserShield,
   FaBullseye,
   FaChartPie,
+  FaEnvelope,
   FaBell
 } from 'react-icons/fa';
 
@@ -61,6 +62,7 @@ const Navbar = () => {
   // Add admin dashboard for admin users
   if (user?.role === 'admin') {
     navigationItems.push({ name: 'Admin Panel', path: '/admin', icon: FaUserShield });
+    navigationItems.push({ name: 'Email Settings', path: '/email-settings', icon: FaEnvelope });
   }
 
   const isActivePath = (path) => location.pathname === path;

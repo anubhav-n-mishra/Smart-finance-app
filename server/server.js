@@ -12,6 +12,7 @@ import chatbotRoutes from './routes/chatbot.js';
 import savingsGoalsRoutes from './routes/savingsGoals.js';
 import budgetRoutes from './routes/budgets.js';
 import notificationRoutes from './routes/notifications.js';
+import emailRoutes from './routes/emails.js';
 
 // Import middleware
 import { errorHandler } from './middleware/errorHandler.js';
@@ -74,6 +75,7 @@ app.use('/api/chatbot', chatbotRoutes);
 app.use('/api/savings-goals', savingsGoalsRoutes);
 app.use('/api/budgets', budgetRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/emails', emailRoutes);
 
 // Health check route
 app.get('/', (req, res) => {

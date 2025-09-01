@@ -1,7 +1,9 @@
 import express from 'express';
 import Budget from '../models/Budget.js';
 import Transaction from '../models/Transaction.js';
+import User from '../models/User.js';
 import { authenticateToken } from '../middleware/auth.js';
+import { sendEmail } from '../services/emailService.js';
 
 const router = express.Router();
 

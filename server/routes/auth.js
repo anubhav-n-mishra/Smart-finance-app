@@ -1,6 +1,7 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
+import { sendWelcomeEmail } from '../controllers/emailController.js';
 
 const router = express.Router();
 
@@ -25,6 +26,19 @@ router.post('/register', async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: '7d' }
     );
+
+    // Send welcome email (don't await to avoid blocking the response)
+    sendWelcomeEmail(user._id, user.email, user.name)
+      .then(result => {
+        if (result.success) {
+          console.log(`✅ Welcome email sent to ${user.email}`);
+        } else {
+          console.log(`⚠️ Failed to send welcome email to ${user.email}: ${result.message}`);
+        }
+      })
+      .catch(err => {
+        console.log(`❌ Error sending welcome email to ${user.email}: ${err.message}`);
+      });
 
     res.status(201).json({
       message: 'User registered successfully',

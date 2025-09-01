@@ -14,6 +14,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import Chatbot from './pages/Chatbot';
 import SavingsGoals from './pages/SavingsGoals';
 import BudgetPlanner from './pages/BudgetPlanner';
+import EmailSettings from './pages/EmailSettings';
 
 // Import components
 import Navbar from './components/Navbar';
@@ -109,14 +110,24 @@ function AppContent() {
 
           {/* Admin Routes */}
           {user?.role === 'admin' && (
-            <Route
-              path="/admin"
-              element={
-                <ProtectedRoute>
-                  <AdminDashboard />
-                </ProtectedRoute>
-              }
-            />
+            <>
+              <Route
+                path="/admin"
+                element={
+                  <ProtectedRoute>
+                    <AdminDashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/email-settings"
+                element={
+                  <ProtectedRoute>
+                    <EmailSettings />
+                  </ProtectedRoute>
+                }
+              />
+            </>
           )}
         </Routes>
       </div>
